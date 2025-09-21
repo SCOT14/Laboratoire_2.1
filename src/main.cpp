@@ -81,11 +81,8 @@ void loop() {
       matrix.print("LAVAGE");
       Serial.println("LAVAGE");
       for(int i = 0; i < 10; i++){
-        analogWrite(PG0, 255); //allume une del en bleu
-        if(currentMillis - etatStart >= clignote_lent){ //clignotement
-          analogWrite(PG0, 0);  //éteint la del
-          etatStart = currentMillis;
-        }
+        PORTG = flipBit(PORTG, PG0);
+        delay(500);
       }
       etat = Rincage;   //changement d'état
       break;
@@ -107,12 +104,10 @@ void loop() {
       matrix.print("ESSORAGE");
       Serial.println("ESSORAGE");
       for(int i = 0; i < 20; i++){
-        analogWrite(PG2, 255);    //on fait clignoter la del 
-        if(currentMillis - etatStart >= clignote_vite){
-          analogWrite(PG2, 0);
-          etatStart = currentMillis;
-        }
+        PORTG = flipBit(PORTG, PG1);
+        delay(250);
       }
+      
       etat = Fin; //changement d'état
       break;
     
